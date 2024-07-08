@@ -1,0 +1,45 @@
+{%extends 'base.html'%}
+
+{%block title%}Profile{%endblock%}
+
+{%block body%}
+{%if user.is_doctor%}
+<h1>Doctor dashboard</h1>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-3">
+            <img src="{{ user.Profile.url }}" class="img-fluid profile-img" alt="Profile Picture">
+        </div>
+        <div class="col-md-9">
+            <h4>{{ user.username }}</h4>
+            <p>{{ user.email }}</p>
+            <p>{{ user.first_name }} {{ user.last_name }}</p>
+            <p><strong>City:</strong> {{ user.Address }}</p>
+            <a href="{% url 'profileupdate'%}" class="btn btn-primary">Edit Profile</a>
+            <a href="{% url 'profiledelete'%}" class="btn btn-primary">Delete Profile</a>
+            <!-- You can add more profile details here as needed -->
+        </div>
+    </div>
+</div>
+{% else %}
+<h1>Patient dashboard</h1>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-3">
+            <img src="{{ user.Profile.url }}" class="img-fluid profile-img" alt="Profile Picture">
+        </div>
+        <div class="col-md-9">
+            <h4>{{ user.username }}</h4>
+            <p>{{ user.email }}</p>
+            <p>{{ user.first_name }} {{ user.last_name }}</p>
+            <p><strong>City:</strong> {{ user.Address }}</p>
+            <a href="{% url 'profileupdate'%}" class="btn btn-primary">Edit Profile</a>
+            <a href="{% url 'profiledelete'%}" class="btn btn-primary">Delete Profile</a>
+            <!-- You can add more profile details here as needed -->
+        </div>
+    </div>
+</div>
+
+{%endif%}
+
+{%endblock%}
