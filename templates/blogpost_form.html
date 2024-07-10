@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block body %}
+  <h2>{{ view.object.pk|yesno:"Edit Blog Post,Create Blog Post" }}</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">{{ view.object.pk|yesno:"Update,Submit" }}</button>
+  </form>
+{% endblock %}

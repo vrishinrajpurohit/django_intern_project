@@ -44,7 +44,15 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
+  <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="nav nav-pills me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link {% if request.resolver_match.url_name == 'blogpost_list' %}active{% endif %}" href="{% url 'blogpost_list' %}">Blogs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.resolver_match.url_name == 'blogpost_create' %}active{% endif %}" href="{% url 'blogpost_create' %}">New Blogs</a>
+        </li>
+      </ul>
 
 
       <ul class="nav nav-pills ms-auto mb-2 mb-lg-0">
@@ -64,6 +72,9 @@
               <span class="dropdown-item">Profile</span>
               {% endif %}
             </li>
+        {% if user.is_authenticated and user.is_doctor %}
+  <li><a class="dropdown-item" href="{%url 'profileblog'%}">My Blogs</a></li>
+  {% endif %}
 
             <li>
               <form action="{% url 'logout' %}" id="myForm" method="post">

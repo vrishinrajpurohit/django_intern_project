@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container mt-5">
+  <h2>All Blog Posts</h2>
+  <ul>
+    {% for post in blog_posts %}
+      <div class="d-flex justify-content-center align-items-start mt-3">
+        <div class="card" style="width: 80rem; height: 30rem;">
+          <div class="row no-gutters h-100">
+            <div class="col-6 h-100">
+              <div id="carouselExampleFade{{ forloop.counter }}" class="carousel slide carousel-fade h-100" data-bs-ride="carousel" data-bs-interval="false">
+                <div class="carousel-inner h-100">
+                  <div class="carousel-item active h-100">
+                    <img src="{{ post.image.url }}" class="d-block w-100 h-100" style="object-fit: cover;" alt="...">
+                  </div>
+                  <!-- Add more carousel items if needed -->
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="card-body d-flex flex-column justify-content-center h-100">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <p class="card-text">{{ post.summary|truncatewords:15 }}...</p>
+                {% if post.is_draft %}
+                  <p class="text-danger">Draft</p>
+                {% endif %}
+                <a href="{% url 'blogpost_detail' post.pk %}" class="btn btn-primary">Check out blog</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}
